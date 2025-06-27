@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block preload_css %}
+<link rel="preload" href="{% static 'css/about.css' %}" as="style" />
+{% endblock %}
+
+{% block content %}
+<main>
+  <div class="hero-section">
+    <h1 class="hero-title">Welcome to the Honorary Consulate of The Hashemite Kingdom of Jordan in Kathmandu, Nepal</h1>
+    <p class="hero-subtitle">Strengthening diplomatic ties and fostering cultural exchange between the Hashemite Kingdom of Jordan and Nepal</p>
+  </div>
+
+  <div class="about-container">
+    <!-- About Consulate Section -->
+    <section class="section secConsulate visible">
+      <div class="max-width">
+        <div class="section-header">
+          <h2 class="section-title">About the Office</h2>
+          <p class="section-subtitle">Your Gateway to the Hashemite Kingdom of Jordan in Nepal</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="content-grid">
+          <div class="info-card">
+            <h3 class="card-title">Our Mission</h3>
+            <div class="card-content">
+              <p>The Office of the Honorary Consul of The Hashemite Kingdom of Jordan in Nepal serves as the primary diplomatic representation of Jordan in Nepal. We are dedicated to strengthening bilateral relations and providing comprehensive consular services.</p>
+              <div class="highlight-box">
+                <h4>Core Objectives:</h4>
+                <ul>
+                  <li>Facilitate diplomatic relations between Jordan and Nepal</li>
+                  <li>Provide efficient consular services</li>
+                  <li>Promote cultural understanding</li>
+                  <li>Support business and trade initiatives</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="card-title">Our Services</h3>
+            <div class="card-content">
+              <ul>
+                <li>Document authentication and legalization</li>
+                <li>Consular assistance for Jordanian citizens</li>
+                <li>Trade and investment facilitation</li>
+                <li>Cultural exchange program coordination</li>
+                <li>Educational cooperation support</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="card-title">Contact Information</h3>
+            <div class="card-content">
+              <p>We are here to assist you with any queries regarding Jordan-Nepal relations and consular services.</p>
+              <div class="highlight-box">
+                <p><strong>Office Hours:</strong> Monday to Friday, 11:00 AM - 3:00 PM</p>
+                <p><strong>Location:</strong> BIVA Complex, 6th Floor, Madhyapur Thimi-3 Kaushaltar, Bhaktapur, Nepal</p>
+                <p><strong>Email:</strong> info@jordanconsulate.org.np</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Removed Nepal-Jordan Relations Section -->
+
+    <!-- About Jordan Section -->
+    <section class="section secJordan visible">
+      <div class="max-width">
+        <div class="section-header">
+          <h2 class="section-title">About Jordan</h2>
+          <p class="section-subtitle">Discover the Hashemite Kingdom</p>
+          <div class="divider"></div>
+        </div>
+
+        <div class="image-gallery">
+          <div class="gallery-item">
+            <img src="{% static 'images/Petra.jpg' %}" alt="Petra, Jordan">
+          </div>
+          <div class="gallery-item">
+            <img src="{% static 'images/AmmanCityscape.jpg' %}" alt="Amman Cityscape">
+          </div>
+          <div class="gallery-item">
+            <img src="{% static 'images/DeadSea.jpg' %}" alt="Dead Sea">
+          </div>
+        </div>
+
+        <div class="content-grid">
+          <div class="info-card">
+            <h3 class="card-title">Country Overview</h3>
+            <div class="card-content">
+              <div class="highlight-box">
+                <h4>Quick Facts:</h4>
+                <ul>
+                  <li>Capital: Amman</li>
+                  <li>Area: 89,342 km²</li>
+                  <li>Population: Approx. 11.5 million (2023 estimate)</li>
+                  <li>Government: Constitutional Monarchy</li>
+                  <li>Official Language: Arabic</li>
+                  <li>Currency: Jordanian Dinar (JOD)</li>
+                  <li>Time Zone: UTC+3</li>
+                  <li>Calling Code: +962</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="card-title">Culture & Heritage</h3>
+            <div class="card-content">
+              <p>Jordan boasts a rich cultural heritage spanning thousands of years:</p>
+              <ul>
+                <li>Ancient archaeological sites including Petra</li>
+                <li>Rich Islamic and Christian history</li>
+                <li>Traditional Bedouin culture</li>
+                <li>Modern arts and culture scene</li>
+                <li>Renowned hospitality</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 class="card-title">Modern Jordan</h3>
+            <div class="card-content">
+              <p>Today's Jordan is a blend of tradition and modernity:</p>
+              <ul>
+                <li>Stable and progressive economy</li>
+                <li>Leading education hub in the Middle East</li>
+                <li>Advanced healthcare system</li>
+                <li>Growing technology sector</li>
+                <li>Popular tourist destination</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
+{% endblock %}
+
+{% block preload_css %}
+<link rel="preload" href="{% static 'css/services.css' %}" as="style" />
+{% endblock %}
+
+{% block content %}
+<header class="hero">
+  <div class="container">
+    <h1>Consular Services</h1>
+    <p>Experience seamless assistance and support for all your travel and documentation needs between Jordan and Nepal.</p>
+  </div>
+</header>
+
+<main>
+  <!-- Services Section -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Comprehensive Services</h2>
+      <div class="services-grid">
+
+        {% comment %} Visas (New) {% endcomment %}
+        <div class="service-card">
+          <div class="service-icon">🌐</div>
+          <h3 class="service-title">Visas</h3>
+          <p class="service-description">
+            All visa applications for Jordan are now processed electronically through the E-Visa Application Services administered by the Jordanian Ministry of Interior.
+          </p>
+          <p class="service-description">
+            This electronic service replaces the visa issuance process previously conducted through the Jordanian embassy in New Delhi, India. The change applies to all applicants, including Arab and Foreign nationals, seeking to visit the Hashemite Kingdom of Jordan.
+          </p>
+          <p class="service-description">
+            E-Visa applications are now processed and issued directly and exclusively through the Ministry of Interior via the following link:
+            <a href="https://eservices.moi.gov.jo" target="_blank" rel="noopener noreferrer">https://eservices.moi.gov.jo</a>.
+          </p>
+        </div>
+
+        {% comment %} Document Authentication {% endcomment %}
+        <div class="service-card">
+          <div class="service-icon">📜</div>
+          <h3 class="service-title">Document Authentication</h3>
+          <p class="service-description">Professional legalization and authentication services for your important documents. Ensure your papers are recognized and accepted in both Jordan and Nepal.</p>
+          <ul class="service-features">
+            <li>Authentication of educational certificates</li>
+            <li>Legalization of commercial documents</li>
+            <li>Verification of legal papers and contracts</li>
+            <li>Apostille services for international use</li>
+            <li>Expert guidance on document requirements</li>
+          </ul>
+        </div>
+
+        {% comment %} Consular Assistance {% endcomment %}
+        <div class="service-card">
+          <div class="service-icon">👥</div>
+          <h3 class="service-title">Consular Assistance</h3>
+          <p class="service-description">Comprehensive support for Jordanian citizens in Nepal. Our dedicated team is here to assist you in various situations, ensuring your well-being and peace of mind.</p>
+          <ul class="service-features">
+            <li>24/7 emergency support hotline</li>
+            <li>Assistance in case of arrest or detention</li>
+            <li>Support during medical emergencies</li>
+            <li>Help with lost or stolen belongings</li>
+            <li>Guidance on local laws and customs</li>
+          </ul>
+        </div>
+
+        {% comment %} Business Services {% endcomment %}
+        <div class="service-card">
+          <div class="service-icon">💼</div>
+          <h3 class="service-title">Business Services</h3>
+          <p class="service-description">Facilitating strong business ties between Jordan and Nepal. Our services are designed to support entrepreneurs, investors, and companies in their international ventures.</p>
+          <ul class="service-features">
+            <li>Trade mission organization and support</li>
+            <li>Business visa facilitation for delegates</li>
+            <li>Networking events with local businesses</li>
+            <li>Market entry guidance and consultations</li>
+            <li>Information on investment opportunities</li>
+          </ul>
+        </div>
+
+        {% comment %} Educational Services {% endcomment %}
+        <div class="service-card">
+          <div class="service-icon">🎓</div>
+          <h3 class="service-title">Educational Services</h3>
+          <p class="service-description">Opening doors to world-class education in Jordan. We provide comprehensive support for Nepalese students interested in studying in Jordan's prestigious institutions.</p>
+          <ul class="service-features">
+            <li>Information on Jordan's top universities</li>
+            <li>Scholarship program guidance</li>
+            <li>Student visa application assistance</li>
+            <li>Pre-departure orientation sessions</li>
+            <li>Alumni network connections</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

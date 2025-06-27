@@ -1,8 +1,149 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block preload_css %}
+<link rel="preload" href="{% static 'css/home.css' %}" as="style" />
+{% endblock %}
 
 {% block content %}
-<div class="container mt-5">
-  <h1>Welcome to the Office of the Honorary Consul of The Hashemite Kingdom of Jordan in Nepal</h1>
-  <p>This is the home page content.</p>
-</div>
+<main>
+  <!-- ================ hero section ================= -->
+  <div class="hero">
+    <div class="slides max-width">
+      <img src="{% static 'images/hero-1.jpg' %}" class="active" alt="Hero Image 1" />
+      <img src="{% static 'images/hero-2.jpg' %}" alt="Hero Image 2" />
+      <img src="{% static 'images/hero-3.jpg' %}" alt="Hero Image 3" />
+      <img src="{% static 'images/hero-4.jpg' %}" alt="Hero Image 4" />
+      <img src="{% static 'images/hero-5.jpg' %}" alt="Hero Image 5" />
+    </div>
+
+    <div class="buttons">
+      <span class="next">&#10095;</span>
+      <span class="prev">&#10094;</span>
+    </div>
+
+    <div class="dotsContainer">
+      <div class="dot active" attr='0' onclick="switchImage(this)"></div>
+      <div class="dot" attr='1' onclick="switchImage(this)"></div>
+      <div class="dot" attr='2' onclick="switchImage(this)"></div>
+      <div class="dot" attr='3' onclick="switchImage(this)"></div>
+      <div class="dot" attr='4' onclick="switchImage(this)"></div>
+    </div>
+  </div>
+  <!-- ================ end hero section ================= -->
+
+  <!-- =================== About Section ===================== -->
+  <section class="about" id="about">
+    <div class="max-width">
+      <h2 class="sectionTitle">About Us</h2>
+      <div class="about-content sectionContent">
+        <div class="column left">
+          <img class="img-fluid" src="{% static 'images/profile.png' %}" alt="Jordan Consulate Kathmandu" />
+        </div>
+        <div class="column right">
+          <div class="text">
+            Welcome to the <span>Honorary Consulate of the Hashemite Kingdom of Jordan</span> in Kathmandu, Nepal
+          </div>
+          <p>
+            The Honorary Consulate of the Hashemite Kingdom of Jordan in Kathmandu, Nepal serves as a consular service provider in Kathmandu. Our mission is to strengthen diplomatic relations, facilitate travel and provide support for Jordanian citizens in Nepal. We are committed to fostering cultural exchange, enhancing trade opportunities and promoting mutual understanding between the two nations. If you are seeking any information about Jordan, our dedicated team is here to assist you with professionalism and care,
+            <a href="{% url 'about' %}" class="more">read more...</a>
+          </p>
+
+          <a class="btn" href="{% url 'contact' %}">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- =================== end About Section ===================== -->
+
+  <!-- ================ Services Section ================ -->
+  <section class="services" id="services">
+    <div class="max-width">
+      <h2 class="sectionTitle">Our Services</h2>
+      <div class="serv-content sectionContent">
+        <div class="card">
+          <div class="box">
+            <i class="fas fa-passport"></i>
+            <div class="text">Consular Services</div>
+            <p>
+              Our office provides a wide range of consular services including document attestation, legal documentation and emergency assistance for Jordanian citizens.
+              <a href="{% url 'services' %}" class="more">more..</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end Services Section ================ -->
+
+  <!-- ================ Useful Link Section ================ -->
+  <section class="useful-links" id="useful-links">
+    <div class="max-width">
+      <h2 class="sectionTitle">Useful Link</h2>
+      <div class="useful-content sectionContent">
+        <div class="column left">
+          <img class="img-fluid" src="{% static 'images/logo2.png' %}" alt="Jordan Consulate Kathmandu" />
+        </div>
+        <div class="column right">
+          <div class="links">Members of the <span>Royal Hashemite</span> Family</div>
+          <a href="https://kingabdullah.jo/" class="link">His Majesty King Abdullah II</a>
+          <a href="https://www.queenrania.jo/en/" class="link">Her Majesty Queen Rania</a>
+          <a href="http://www.kinghussein.gov.jo//" class="link">His Late Majesty King Hussein I</a>
+          <a href="http://www.noor.gov.jo/" class="link">Her Majesty Queen Noor</a>
+          <a href="http://www.princessbasma.jo/" class="link">Her Royal Highness Princess Basma</a>
+          <a href="http://www.elhassanbintalal.jo/en-us/" class="link">His Royal Highness Prince El-Hassan</a>
+
+          <a href="{% url 'useful_link' %}" class="more">read more...</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end Useful Link Section ================ -->
+
+  <!-- ================ Gallery Section ================ -->
+  <section class="gallery">
+    <div class="max-width swiper">
+      <h2 class="sectionTitle">Gallery</h2>
+      <div class="slide-container sectionContent">
+        <div class="swiper-button-next swiper-navBtn"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+        <div class="card-wrapper swiper-wrapper">
+          <div class="card swiper-slide">
+            <div class="image-box">
+              <img src="{% static 'images/hero-1.jpg' %}" alt="Gallery Image 1" />
+            </div>
+          </div>
+          <div class="card swiper-slide">
+            <div class="image-box">
+              <img src="{% static 'images/hero-2.jpg' %}" alt="Gallery Image 2" />
+            </div>
+          </div>
+          <div class="card swiper-slide">
+            <div class="image-box">
+              <img src="{% static 'images/hero-3.jpg' %}" alt="Gallery Image 3" />
+            </div>
+          </div>
+          <div class="card swiper-slide">
+            <div class="image-box">
+              <img src="{% static 'images/hero-4.jpg' %}" alt="Gallery Image 4" />
+            </div>
+          </div>
+          <div class="card swiper-slide">
+            <div class="image-box">
+              <img src="{% static 'images/hero-5.jpg' %}" alt="Gallery Image 5" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-pagination"></div>
+      <a href="{% url 'gallery' %}" class="btn">View All</a>
+    </div>
+  </section>
+  <!-- ================ end Gallery Section ================ -->
+</main>
 {% endblock %}
