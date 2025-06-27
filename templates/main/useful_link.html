@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/useful-link.css' %}">
+{% endblock %}
+
+{% block preload_css %}
+<link rel="preload" href="{% static 'css/useful-link.css' %}" as="style" />
+{% endblock %}
+
+{% block content %}
+<!-- =============== Main  ================ -->
+
+<header>
+  <h1>Useful Links</h1>
+  <p class="subtitle">Explore resources related to Jordan and Nepal</p>
+</header>
+
+<div class="container">
+  <div class="categories" id="categories"></div>
+  <div class="links-grid" id="linksGrid"></div>
+</div>
+
+<script>
+  const categories = [
+    "All",
+    "Tourism",
+    "Government",
+    "Education",
+    "Business",
+    "Culture"
+  ];
+
+  const links = [
+    {
+      category: "Tourism",
+      title: "Visit Jordan",
+      description: "Official tourism website of Jordan",
+      url: "https://www.visitjordan.com/",
+      image: "https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8am9yZGFufGVufDB8fDB8fHww"
+    },
+    {
+      category: "Tourism",
+      title: "Jordan Trail",
+      description: "Hiking trails across Jordan",
+      url: "https://jordantrail.org/",
+      image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z292ZXJubWVudHxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Tourism",
+      title: "Petra",
+      description: "UNESCO World Heritage site",
+      url: "https://www.nationalgeographic.com/travel/world-heritage/article/petra",
+      image: "{% static 'images/petra.jpg' %}"
+    },
+    {
+      category: "Tourism",
+      title: "Dead Sea",
+      description: "Lowest point on Earth",
+      url: "https://www.deadseajordan.com/",
+      image: "https://images.unsplash.com/photo-1548588627-f978862b85e1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8am9yZGFufGVufDB8fDB8fHww"
+    },
+    {
+      category: "Tourism",
+      title: "Wadi Rum",
+      description: "Desert landscape and Bedouin culture",
+      url: "https://wadirum.jo/",
+      image: "https://images.unsplash.com/photo-1565689478170-6624de957899?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGpvcmRhbnxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Tourism",
+      title: "Jerash",
+      description: "Ancient Roman city",
+      url: "https://www.jerashjo.com/",
+      image: "{% static 'images/jerash.jpg' %}"
+    },
+    {
+      category: "Tourism",
+      title: "Aqaba",
+      description: "Jordan's only coastal city",
+      url: "https://www.aqaba.jo/",
+      image: "https://images.unsplash.com/photo-1562591970-254bc62245c0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGpvcmRhbnxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Tourism",
+      title: "Amman Citadel",
+      description: "Historical site in Amman",
+      url: "https://www.amman.com/amman-citadel/",
+      image: "https://images.unsplash.com/photo-1580834341580-8c17a3a630ca?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8am9yZGFufGVufDB8fDB8fHww"
+    },
+    {
+      category: "Tourism",
+      title: "Jordan Pass",
+      description: "Unified ticket for tourists",
+      url: "https://www.jordanpass.jo/",
+      image: "{% static 'images/pass.jpg' %}"
+    },
+    {
+      category: "Tourism",
+      title: "Royal Jordanian",
+      description: "Jordan's national airline",
+      url: "https://www.rj.com/",
+      image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWlybGluZXxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Jordan e-Government",
+      description: "Official e-government portal",
+      url: "https://jordan.gov.jo/",
+      image: "https://images.unsplash.com/photo-1590012314607-cda9d9b699ae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z292ZXJubWVudHxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Ministry of Foreign Affairs",
+      description: "Jordan's foreign affairs ministry",
+      url: "http://www.mfa.gov.jo/",
+      image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Zm9yZWlnbiUyMGFmZmFpcnN8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Government",
+      title: "Jordan Investment Commission",
+      description: "Promote and facilitate investment",
+      url: "https://www.jic.gov.jo/",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW52ZXN0bWVudHxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Central Bank of Jordan",
+      description: "Jordan's central bank",
+      url: "https://www.cbj.gov.jo/",
+      image: "https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFua3xlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Jordan Customs",
+      description: "Customs regulations and services",
+      url: "https://www.customs.gov.jo/",
+      image: "https://images.unsplash.com/photo-1573030889348-c6b0f8b15e40?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VzdG9tc3xlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Ministry of Health",
+      description: "Jordan's health ministry",
+      url: "https://www.moh.gov.jo/",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVhbHRoJTIwbWluaXN0cnl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Government",
+      title: "Ministry of Education",
+      description: "Jordan's education ministry",
+      url: "http://www.moe.gov.jo/",
+      image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZWR1Y2F0aW9ufGVufDB8fDB8fHww"
+    },
+    {
+      category: "Government",
+      title: "Jordan Tourism Board",
+      description: "Official tourism promotion board",
+      url: "https://www.mota.gov.jo/",
+      image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dG91cmlzbXxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Department of Statistics",
+      description: "Official statistics of Jordan",
+      url: "http://dosweb.dos.gov.jo/",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8c3RhdGlzdGljc3xlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Government",
+      title: "Jordan Armed Forces",
+      description: "Official website of Jordan's military",
+      url: "https://www.jaf.mil.jo/",
+      image: "https://images.unsplash.com/photo-1579912437766-7896df6d3cd3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWlsaXRhcnl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "University of Jordan",
+      description: "Jordan's largest public university",
+      url: "http://www.ju.edu.jo/",
+      image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8dW5pdmVyc2l0eXxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      category: "Education",
+      title: "Jordan University of Science and Technology",
+      description: "Leading technological university",
+      url: "https://www.just.edu.jo/",
+      image: "https://images.unsplash.com/photo-1562774053-701939374585?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGVjaG5vbG9neSUyMHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Princess Sumaya University for Technology",
+      description: "Private, non-profit university",
+      url: "https://www.psut.edu.jo/",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVjaG5vbG9neSUyMHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "German Jordanian University",
+      description: "Public university with German partnership",
+      url: "http://www.gju.edu.jo/",
+      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVjaG5vbG9neSUyMHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Yarmouk University",
+      description: "Public university in Irbid",
+      url: "https://www.yu.edu.jo/",
+      image: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Al-Balqa Applied University",
+      description: "Public university focusing on applied sciences",
+      url: "https://www.bau.edu.jo/",
+      image: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Hashemite University",
+      description: "Public university in Zarqa",
+      url: "https://hu.edu.jo/",
+      image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHVuaXZlcnNpdHl8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Jordan Open Educational Resources",
+      description: "Free educational resources",
+      url: "https://www.oercommons.org/hubs/jordan",
+      image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWR1Y2F0aW9uYWwlMjByZXNvdXJjZXN8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      category: "Education",
+      title: "Queen Rania Teacher Academy",
+      description: "Teacher training and development",
+      url: "https://www.queenrania.jo/en/initiatives/queen-rania-teacher-academy",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dGVhY2hlciUyMHRyYWluaW5nfGVufDB8fDB8fHww"
+    },
+    {
+      category: "Education",
+      title: "Edraak",
+      description: "Arabic MOOC platform",
+      url: "https://www.edraak.org/",
+      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b25saW5lJTIwbGVhcm5pbmd8ZW58MHx8MHx8fDA%3D"
+    },
+          {
+              category: "Business",
+              title: "Jordan Chamber of Commerce",
+              description: "Representing the commercial sector",
+              url: "https://www.jocc.org.jo/",
+              image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YnVzaW5lc3N8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Business",
+              title: "Amman Stock Exchange",
+              description: "Jordan's securities market",
+              url: "https://www.ase.com.jo/",
+              image: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3RvY2slMjBleGNoYW5nZXxlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Business",
+              title: "Jordan Enterprise Development Corporation",
+              description: "Support for SMEs",
+              url: "https://www.jedco.gov.jo/",
+              image: "https://images.unsplash.com/photo-1664575602276-acd073f104c1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c21hbGwlMjBidXNpbmVzc3xlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Business",
+              title: "Jordan Free and Development Zones Group",
+              description: "Managing free zones in Jordan",
+              url: "https://www.jfdz.jo/",
+              image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZnJlZSUyMHpvbmV8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Business",
+              title: "Jordan Industrial Estates Company",
+              description: "Industrial zones management",
+              url: "https://www.jiec.com/",
+              image: "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kdXN0cmlhbCUyMHpvbmV8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Business",
+              title: "Jordan Trade Facilitation Portal",
+              description: "Import/export procedures",
+              url: "https://www.tfadatabase.org/members/jordan",
+              image: "{% static 'images/Trade-Facilitation-Portal.png' %}"
+          },
+          {
+              category: "Business",
+              title: "Jordan Business Forum",
+              description: "Business networking platform",
+              url: "https://www.jordanbusinessforum.com/",
+              image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBuZXR3b3JraW5nfGVufDB8fDB8fHww"
+          },
+          {
+              category: "Business",
+              title: "Jordan Loan Guarantee Corporation",
+              description: "Facilitating SME financing",
+              url: "https://www.jlgc.com/",
+              image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG9hbnxlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Business",
+              title: "Jordan Strategy Forum",
+              description: "Economic policy think tank",
+              url: "http://www.jsf.org/",
+              image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWNvbm9taWMlMjBwb2xpY3l8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Culture",
+              title: "Royal Film Commission Jordan",
+              description: "Promoting film culture in Jordan",
+              url: "https://www.film.jo/",
+              image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmlsbXxlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Culture",
+              title: "Jordan National Gallery of Fine Arts",
+              description: "Contemporary art museum",
+              url: "http://www.nationalgallery.org/",
+              image: "https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXJ0JTIwZ2FsbGVyeXxlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Culture",
+              title: "Royal Cultural Center",
+              description: "Cultural events and performances",
+              url: "https://www.rcc.gov.jo/",
+              image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VsdHVyYWwlMjBjZW50ZXJ8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Culture",
+              title: "Jordan Museum",
+              description: "National museum of Jordan",
+              image: "{% static 'images/National-museum.jpg' %}"
+          },
+          {
+              category: "Culture",
+              title: "Royal Automobile Museum",
+              description: "Showcasing Jordan's automotive history",
+              url: "http://www.royalautomuseum.jo/",
+              image: "https://images.unsplash.com/photo-1511527844068-006b95d162c2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXV0b21vYmlsZSUyMG11c2V1bXxlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Culture",
+              title: "Jordan Food Week",
+              description: "Annual culinary festival",
+              url: "https://www.jordanfoodweek.com/",
+              image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9vZCUyMGZlc3RpdmFsfGVufDB8fDB8fHww"
+          },
+          {
+              category: "Culture",
+              title: "Amman Design Week",
+              description: "Promoting design and creativity",
+              url: "https://www.ammandesignweek.com/",
+              image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGVzaWduJTIwd2Vla3xlbnwwfHwwfHx8MA%3D%3D"
+          },
+          {
+              category: "Culture",
+              title: "Jordan Heritage Revival Company",
+              description: "Preserving Jordanian heritage",
+              url: "https://www.jhrc.jo/",
+              image: "https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGVyaXRhZ2V8ZW58MHx8MHx8fDA%3D"
+          },
+          {
+              category: "Culture",
+              title: "Jordan Trail Association",
+              description: "Promoting hiking and outdoor culture",
+              url: "https://jordantrail.org/",
+              image: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGlraW5nfGVufDB8fDB8fHww"
+          }
+  ];
+
+  function createCategoryButtons() {
+    const categoriesContainer = document.getElementById('categories');
+    categoriesContainer.innerHTML = ''; // clear before adding
+    categories.forEach(category => {
+      const button = document.createElement('button');
+      button.textContent = category;
+      button.className = 'category-btn';
+      button.onclick = () => filterLinks(category);
+      categoriesContainer.appendChild(button);
+    });
+  }
+
+  function filterLinks(category) {
+    let filteredLinks = [];
+    if (category === 'All') {
+      filteredLinks = links;
+    } else {
+      filteredLinks = links.filter(link => link.category === category);
+    }
+    displayLinks(filteredLinks);
+    updateActiveCategory(category);
+  }
+
+  function updateActiveCategory(activeCategory) {
+    const buttons = document.querySelectorAll('.category-btn');
+    buttons.forEach(button => {
+      if (button.textContent === activeCategory) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+  }
+
+  function displayLinks(linksToDisplay) {
+    const linksGrid = document.getElementById('linksGrid');
+    linksGrid.innerHTML = '';
+    linksToDisplay.forEach(link => {
+      const linkCard = document.createElement('div');
+      linkCard.className = 'link-card';
+      linkCard.innerHTML = `
+        <img src="${link.image}" alt="${link.title}" class="link-image" />
+        <div class="link-content">
+          <h3 class="link-title">${link.title}</h3>
+          <p class="link-description">${link.description}</p>
+          <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-url">Visit Site</a>
+        </div>
+      `;
+      linksGrid.appendChild(linkCard);
+    });
+  }
+
+  // Initialize on page load
+  createCategoryButtons();
+  filterLinks('All');
+</script>
+{% endblock %}
