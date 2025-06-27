@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/converters.css' %}">
+{% endblock %}
+
+{% block preload_css %}
+{% endblock %}
+
+{% block content %}
+<div class="tools-wrapper">
+  <header class="tools-header">
+    <h1>Nepal – Jordan Essentials</h1>
+    <p>Convert currency, dates, and access the calendar with ease</p>
+  </header>
+
+  <section class="tool-section calendar-section">
+    <h2>📅 Nepali Calendar</h2>
+    <div class="calendar-embed">
+      <iframe
+        src="https://www.hamropatro.com/widgets/calender-medium.php"
+        frameborder="0"
+        scrolling="no"
+        marginwidth="0"
+        marginheight="0"
+        style="border:none; overflow:hidden; width:100%; max-width:320px; height:385px;"
+        allowtransparency="true"
+      ></iframe>
+    </div>
+  </section>
+
+  <section class="tool-section converters-section">
+    <div class="converter-card">
+      <h2>💱 Currency Converter</h2>
+      <form id="currencyForm" onsubmit="return false;">
+        <label for="amount">Amount</label>
+        <input
+          type="number"
+          id="amount"
+          min="0"
+          value="1"
+          placeholder="Enter amount"
+          required
+        />
+
+        <label for="direction">Conversion Direction</label>
+        <select id="direction" required>
+          <option value="JOD_to_NPR">JOD to NPR</option>
+          <option value="NPR_to_JOD">NPR to JOD</option>
+        </select>
+
+        <button id="convertCurrencyBtn" type="submit">Convert</button>
+      </form>
+      <div id="currencyResult" class="result-box" aria-live="polite"></div>
+    </div>
+
+    <div class="converter-card">
+      <h2>📆 Date Converter</h2>
+      <form id="dateForm" onsubmit="return false;">
+        <label for="gregorian_date">Gregorian Date (AD)</label>
+        <input type="date" id="gregorian_date" required />
+
+        <button id="convertDateBtn" type="submit">Convert to Nepali Date (BS)</button>
+      </form>
+      <div id="nepaliDateResult" class="result-box" aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+
+<script type="module" src="{% static 'js/converter.js' %}"></script>
+{% endblock %}

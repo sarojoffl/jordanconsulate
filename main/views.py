@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import JsonResponse
+import datetime
 
 def home(request):
     return render(request, 'main/home.html')
@@ -17,3 +19,6 @@ def articles(request):
 
 def contact(request):
     return render(request, 'main/contact.html')
+
+def converters_view(request):
+    return render(request, 'main/converters.html')

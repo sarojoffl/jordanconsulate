@@ -8,4 +8,5 @@ urlpatterns = [
     path('useful-link/', views.useful_link, name='useful_link'),
     path('articles/', views.articles, name='articles'),
     path('contact/', views.contact, name='contact'),
+    path('converters/', views.converters_view, name='converters'),
 ]
