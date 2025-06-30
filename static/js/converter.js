@@ -2,7 +2,7 @@
 import NepaliDate from 'https://cdn.jsdelivr.net/npm/nepali-date-converter/dist/nepali-date-converter.es5.js';
 
 // Currency conversion rate (update as needed)
-const JOD_TO_NPR_RATE = 116.5;
+const JOD_TO_NPR_RATE = 192.9;
 
 // Currency Converter
 document.getElementById('convertCurrencyBtn').addEventListener('click', () => {

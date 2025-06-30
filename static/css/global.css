@@ -617,6 +617,26 @@ width: 200px;
   color: #cececeb4;
   }
   
+  .navBar .converterContainer {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .navBar .converterIcon {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.6rem;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .navBar .converterIcon:hover {
+    color: #cececeb4;
+  }
+
 
 
   .navBar .resultsContainer {

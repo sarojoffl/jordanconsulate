@@ -3,6 +3,33 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/converters.css' %}">
+<!-- Minimal FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
+<style>
+  .calendar-embed-wrapper {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .calendar-embed {
+    max-width: 350px;  /* increased width to avoid cutoff */
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: visible;
+  }
+  .calendar-embed iframe {
+    width: 100% !important;
+    min-width: 320px;  /* prevent shrinking too much */
+    height: 385px;
+    border: none;
+    overflow: hidden;
+  }
+</style>
 {% endblock %}
 
 {% block preload_css %}
@@ -16,17 +43,24 @@
   </header>
 
   <section class="tool-section calendar-section">
-    <h2>📅 Nepali Calendar</h2>
-    <div class="calendar-embed">
-      <iframe
-        src="https://www.hamropatro.com/widgets/calender-medium.php"
-        frameborder="0"
-        scrolling="no"
-        marginwidth="0"
-        marginheight="0"
-        style="border:none; overflow:hidden; width:100%; max-width:320px; height:385px;"
-        allowtransparency="true"
-      ></iframe>
+    <h2>📅 Nepali & English Calendars</h2>
+    <div class="calendar-embed-wrapper">
+
+      <!-- Nepali Calendar -->
+      <div class="calendar-embed">
+        <iframe
+          src="https://www.hamropatro.com/widgets/calender-medium.php"
+          frameborder="0"
+          scrolling="no"
+          marginwidth="0"
+          marginheight="0"
+          allowtransparency="true"
+        ></iframe>
+      </div>
+
+      <!-- Simple FullCalendar -->
+      <div id="gregorianCalendar" class="calendar-embed"></div>
+
     </div>
   </section>
 
@@ -68,5 +102,26 @@
   </section>
 </div>
 
+<!-- FullCalendar JS from CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
 <script type="module" src="{% static 'js/converter.js' %}"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    new FullCalendar.Calendar(document.getElementById('gregorianCalendar'), {
+      initialView: 'dayGridMonth',
+      headerToolbar: {
+        left: 'prev,next',
+        center: 'title',
+        right: ''
+      },
+      contentHeight: 385,
+      selectable: false,
+      editable: false,
+      weekNumbers: false,
+      locale: 'en'
+    }).render();
+  });
+</script>
 {% endblock %}
