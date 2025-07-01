@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/useful-link.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<style>
+  .news-card {
+    border: none;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.15);
+  }
+
+  .news-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+  }
+
+  .news-title:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+  }
+
+  .meta-info {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+  }
+
+  .news-badge {
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 0.4rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    color: #495057;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="text-center mb-5">
+    <h1 class="fw-bold">📰 Latest News</h1>
+    <p class="text-muted">Stay updated on Nepal–Jordan trade, diplomacy, and collaboration</p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4">
+    {% for item in news %}
+    <div class="col">
+      <div class="card news-card h-100 p-3">
+        <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="news-title d-block text-decoration-none">
+          {{ item.title }}
+        </a>
+        <div class="meta-info">
+          <span class="news-badge">{{ item.source }}</span>
+          {% if item.date %}
+          <span class="news-badge">{{ item.date }}</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

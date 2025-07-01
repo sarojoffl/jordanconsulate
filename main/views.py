@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 import datetime
 
+# Static Pages
 def home(request):
     return render(request, 'main/home.html')
 
@@ -22,3 +23,64 @@ def contact(request):
 
 def converters_view(request):
     return render(request, 'main/converters.html')
+
+
+# News Page
+def news_view(request):
+    news = [
+        {
+            "title": "नेपाल र जोर्डनबिच निजी क्षेत्रको सहकार्य, व्यापार र आर्थिक सम्बन्ध विस्तार हुँदै",
+            "url": "https://nayapatrikadaily.com/news-details/169444/2025-06-04",
+            "source": "nayapatrikadaily.com",
+            "date": "2025-06-04"
+        },
+        {
+            "title": "सभामुख र जोर्डनका राजदूतबीच शिष्टाचार भेट | Nepal Khabar",
+            "url": "https://nepalkhabar.com/politics/239084-2025-6-4-17-5-11",
+            "source": "nepalkhabar.com",
+            "date": "2025-06-04"
+        },
+        {
+            "title": "Office of honorary consul of Jordan opens in Kathmandu",
+            "url": "https://kathmandupost.com/national/2025/06/05/office-of-honorary-consul-of-jordan-opens-in-kathmandu",
+            "source": "kathmandupost.com",
+            "date": "2025-06-05"
+        },
+        {
+            "title": "Nepal–Jordan private sector collaboration poised for trade and economic expansion",
+            "url": "https://theannapurnaexpress.com/story/54924/",
+            "source": "theannapurnaexpress.com",
+            "date": None
+        },
+        {
+            "title": "Nepal and Jordan set to boost trade and investment",
+            "url": "https://en.nepalkhabar.com/news/detail/14100/",
+            "source": "en.nepalkhabar.com",
+            "date": None
+        },
+        {
+            "title": "Jordan Opens Honorary Consulate in Nepal, Appoints Kunal Kayal as Honorary Consul - The Diplomat Nepal",
+            "url": "https://diplomatnepal.com/news/jordan-opens-honorary-consulate-in-nepal-appoints-kunal-kayal-as-honorary-consul/",
+            "source": "diplomatnepal.com",
+            "date": None
+        },
+        {
+            "title": "Jordan Ambassador Abdelghani Pays Courtesy Call on Speaker Ghimire - The Diplomat Nepal",
+            "url": "https://diplomatnepal.com/news/jordan-ambassador-abdelghani-pays-courtesy-call-on-speaker-ghimire/",
+            "source": "diplomatnepal.com",
+            "date": None
+        },
+        {
+            "title": "नेपाल-जोर्डन कूटनीतिक सम्बन्ध स्थापनाको ६०औं वार्षिकोत्सव मनाईयो, कसले के भने ? - Businesspana",
+            "url": "https://businesspana.com/more/update/19395/",
+            "source": "businesspana.com",
+            "date": None
+        },
+        {
+            "title": "Nepal–Jordan private sector collaboration poised for trade and economic expansion - The DMN News | Breaking News, Live Updates, Analysis from Nepal",
+            "url": "https://thedmnnews.com/nepal-jordan-private-sector-collaboration-poised-for-trade-and-economic-expansion/",
+            "source": "thedmnnews.com",
+            "date": None
+        }
+    ]
+    return render(request, 'main/news.html', {'news': news})
