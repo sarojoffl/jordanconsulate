@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-import datetime
 
 # Static Pages
 def home(request):
@@ -84,3 +83,44 @@ def news_view(request):
         }
     ]
     return render(request, 'main/news.html', {'news': news})
+
+
+# Photo Album Page
+def photo_album_view(request):
+    albums = [
+        {
+            "title": "Bhaktapur Durbar Square Visit",
+            "photos": [
+                f"photos/bhaktapur ({i}).jpg" for i in range(1, 8)
+            ]
+        },
+        {
+            "title": "Courtesy Calls Paid of High-Profile Govt. Officials",
+            "photos": (
+                ["photos/courtesy (1).jpg", "photos/courtesy (1).jpeg",
+                 "photos/courtesy (2).jpg", "photos/courtesy (2).jpeg"] +
+                [f"photos/courtesy ({i}).jpg" for i in range(3, 9)]
+            )
+        },
+        {
+            "title": "Celebratory Dinner on 3rd June, 2025",
+            "photos": (
+                ["photos/dinner (1).jpg", "photos/dinner (1).jpeg",
+                 "photos/dinner (2).jpg", "photos/dinner (2).jpeg",
+                 "photos/dinner (3).jpg", "photos/dinner (3).jpeg",
+                 "photos/dinner (4).jpg", "photos/dinner (4).jpeg",
+                 "photos/dinner (5).jpg", "photos/dinner (5).jpeg",
+                 "photos/dinner (6).jpg", "photos/dinner (6).jpeg",
+                 "photos/dinner (7).jpg", "photos/dinner (7).jpeg",
+                 "photos/dinner (8).jpg", "photos/dinner (8).jpeg"] +
+                [f"photos/dinner ({i}).jpg" for i in range(9, 29)]
+            )
+        },
+        {
+            "title": "Formal Inauguration & Flag Hoisting Event",
+            "photos": [
+                f"photos/inauguration ({i}).jpg" for i in range(1, 7)
+            ]
+        }
+    ]
+    return render(request, 'main/photo_album.html', {'albums': albums})
